@@ -1,0 +1,11 @@
+@import '../mixins/media';
+.resultCard{
+    @include for-phone{
+        margin: 20px auto;
+    }
+}
+.tab-content{
+    @include for-phone{
+        margin: 40px auto;
+    }
+}

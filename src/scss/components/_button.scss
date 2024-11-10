@@ -1,0 +1,6 @@
+@import '../mixins/media';
+.btn{
+    @include for-phone{
+        width:100%;
+    }
+}

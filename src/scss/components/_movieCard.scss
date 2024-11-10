@@ -1,0 +1,54 @@
+.movie-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 330px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    img{
+        width:100%;
+        height:auto;
+        @include for-desktop{
+           width:auto;
+           max-width:400px;
+        }
+    }
+}
+.movie-card__center{
+    margin: 0 auto;
+    width:100%;
+}
+.movie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.movie-title {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.movie-rating {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.movie-body p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.movie-plot {
+    font-style: italic;
+    color: #555;
+}
+
+.movie-footer {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #777;
+}

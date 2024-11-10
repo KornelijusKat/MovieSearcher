@@ -1,0 +1,12 @@
+@import 'bootstrap';
+@import 'components/form';
+@import 'components/button';
+@import 'mixins/media';
+@import 'components/resultCard';
+@import 'components/movieCard';
+@import 'components/header';
+
+.container{
+    position: relative;
+    height:100%;
+}

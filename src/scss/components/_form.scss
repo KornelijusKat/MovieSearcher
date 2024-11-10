@@ -1,0 +1,14 @@
+@import '../mixins/media';
+.searchCard__body{
+   margin: 20px auto;
+        @include for-desktop{
+            padding-top: 15px;
+            position:sticky;
+            top:20px;
+        }
+        @include for-phone{
+            width: 100%;
+            max-width: 400px;
+            padding:20px;
+        }
+}
