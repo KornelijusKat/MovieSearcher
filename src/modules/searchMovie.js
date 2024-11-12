@@ -7,13 +7,17 @@ const searchMovie = () =>{
         e.preventDefault();
         const inputVal = document.querySelector('input')
         storeSearches(queryArray,inputVal.value);
-        console.log(JSON.parse(localStorage.getItem("searchedTerms")));
         const movies = document.querySelector('.list-group');
-        if (movies && movies.innerHTML.trim() !== "") {
+        const parsedData =JSON.parse(localStorage.getItem(inputVal.value)); 
+        if(parsedData !== null){
             movies.innerHTML = "";
+            movieInfo(parsedData)
         }
-        ajaxService(inputVal.value).then(result =>{
-            movieInfo(result.Search);
-    })})
+        else{
+            movies.innerHTML = "";
+            ajaxService('s',inputVal.value).then(result =>{
+                movieInfo(result.Search);
+                localStorage.setItem(inputVal.value,JSON.stringify(result.Search));
+    })}})
 }
 export default searchMovie;

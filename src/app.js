@@ -1,12 +1,8 @@
 import renderForm from "./modules/renderForm";
-import ajaxService from "./modules/ajaxService";
-import movieInfo from "./modules/movieInfo";
-import movieDetails from "./modules/movieDetails";
-import ajaxServiceDetails from "./modules/ajaxServiceDetails";
 import eventFillDetails from "./modules/eventFillDetails";
 import searchMovie from "./modules/searchMovie";
 import viewHistory from "./modules/viewHistory";
 renderForm();
 searchMovie();
 eventFillDetails();
-viewHistory();
+//viewHistory();

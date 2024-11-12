@@ -1,4 +1,4 @@
-import ajaxServiceDetails from "./ajaxServiceDetails";
+import ajaxService from "./ajaxService";
 import movieDetails from "./movieDetails";
 const eventFillDetails = () => {
     document.querySelector('.list-group').addEventListener('click', (e) =>{
@@ -8,8 +8,7 @@ const eventFillDetails = () => {
             detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
         }
         else{
-        ajaxServiceDetails(movieItem.dataset.value).then(result => {
-            console.log('hi');
+        ajaxService('i',movieItem.dataset.value).then(result => {
             movieDetails(result, movieItem);
         })}
     })

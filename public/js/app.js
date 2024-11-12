@@ -10,25 +10,17 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_renderForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/renderForm */ "./src/modules/renderForm.js");
-/* harmony import */ var _modules_ajaxService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ajaxService */ "./src/modules/ajaxService.js");
-/* harmony import */ var _modules_movieInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/movieInfo */ "./src/modules/movieInfo.js");
-/* harmony import */ var _modules_movieDetails__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/movieDetails */ "./src/modules/movieDetails.js");
-/* harmony import */ var _modules_ajaxServiceDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/ajaxServiceDetails */ "./src/modules/ajaxServiceDetails.js");
-/* harmony import */ var _modules_eventFillDetails__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/eventFillDetails */ "./src/modules/eventFillDetails.js");
-/* harmony import */ var _modules_searchMovie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/searchMovie */ "./src/modules/searchMovie.js");
-/* harmony import */ var _modules_viewHistory__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/viewHistory */ "./src/modules/viewHistory.js");
-
-
-
-
+/* harmony import */ var _modules_eventFillDetails__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/eventFillDetails */ "./src/modules/eventFillDetails.js");
+/* harmony import */ var _modules_searchMovie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/searchMovie */ "./src/modules/searchMovie.js");
+/* harmony import */ var _modules_viewHistory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/viewHistory */ "./src/modules/viewHistory.js");
 
 
 
 
 (0,_modules_renderForm__WEBPACK_IMPORTED_MODULE_0__["default"])();
-(0,_modules_searchMovie__WEBPACK_IMPORTED_MODULE_6__["default"])();
-(0,_modules_eventFillDetails__WEBPACK_IMPORTED_MODULE_5__["default"])();
-(0,_modules_viewHistory__WEBPACK_IMPORTED_MODULE_7__["default"])();
+(0,_modules_searchMovie__WEBPACK_IMPORTED_MODULE_2__["default"])();
+(0,_modules_eventFillDetails__WEBPACK_IMPORTED_MODULE_1__["default"])();
+//viewHistory();
 
 /***/ }),
 
@@ -42,9 +34,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var ajaxService = function ajaxService(term) {
+var ajaxService = function ajaxService(type, term) {
   var key = "5925a40b";
-  var uri = "http://www.omdbapi.com/?s=".concat(term, "&apikey=").concat(key);
+  var uri = "http://www.omdbapi.com/?".concat(type, "=").concat(term, "&apikey=").concat(key);
   return fetch(uri).then(function (response) {
     return response.json();
   });
@@ -53,25 +45,20 @@ var ajaxService = function ajaxService(term) {
 
 /***/ }),
 
-/***/ "./src/modules/ajaxServiceDetails.js":
-/*!*******************************************!*\
-  !*** ./src/modules/ajaxServiceDetails.js ***!
-  \*******************************************/
+/***/ "./src/modules/detilsHtml.js":
+/*!***********************************!*\
+  !*** ./src/modules/detilsHtml.js ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var ajaxServiceDetails = function ajaxServiceDetails(term) {
-  var key = "5925a40b";
-  console.log(term);
-  var uri = "https://www.omdbapi.com/?i=".concat(term, "&apikey=").concat(key);
-  return fetch(uri).then(function (response) {
-    return response.json();
-  });
+var detailsHtml = function detailsHtml(movie) {
+  return "\n<div class=\"movie-card\">\n    <div class=\"movie-header\">\n        <p class=\"movie-rating\">Rated: <strong>".concat(movie.Rated || 'N/A', "</strong></p>\n    </div>\n    <div class=\"movie-body\">\n        <p><strong>Released:</strong> ").concat(movie.Released || 'N/A', "</p>\n        <p><strong>Runtime:</strong> ").concat(movie.Runtime || 'N/A', "</p>\n        <p><strong>Genre:</strong> ").concat(movie.Genre || 'N/A', "</p>\n        <p><strong>Director:</strong> ").concat(movie.Director || 'N/A', "</p>\n        <p><strong>Writer:</strong> ").concat(movie.Writer || 'N/A', "</p>\n        <p><strong>Actors:</strong> ").concat(movie.Actors || 'N/A', "</p>\n        <p class=\"movie-plot\"><strong>Plot:</strong> ").concat(movie.Plot || 'N/A', "</p>\n        <p><strong>Language:</strong> ").concat(movie.Language || 'N/A', "</p>\n        <p><strong>Country:</strong> ").concat(movie.Country || 'N/A', "</p>\n    </div>\n    <div class=\"movie-footer\">\n        <p><strong>IMDb Rating:</strong> ").concat(movie.imdbRating || 'N/A', "</p>\n    </div>\n</div>\n");
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ajaxServiceDetails);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (detailsHtml);
 
 /***/ }),
 
@@ -85,7 +72,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ajaxServiceDetails__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ajaxServiceDetails */ "./src/modules/ajaxServiceDetails.js");
+/* harmony import */ var _ajaxService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ajaxService */ "./src/modules/ajaxService.js");
 /* harmony import */ var _movieDetails__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movieDetails */ "./src/modules/movieDetails.js");
 
 
@@ -96,8 +83,7 @@ var eventFillDetails = function eventFillDetails() {
     if (detailsDiv && detailsDiv.innerHTML.trim() !== "") {
       detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
     } else {
-      (0,_ajaxServiceDetails__WEBPACK_IMPORTED_MODULE_0__["default"])(movieItem.dataset.value).then(function (result) {
-        console.log('hi');
+      (0,_ajaxService__WEBPACK_IMPORTED_MODULE_0__["default"])('i', movieItem.dataset.value).then(function (result) {
         (0,_movieDetails__WEBPACK_IMPORTED_MODULE_1__["default"])(result, movieItem);
       });
     }
@@ -118,9 +104,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var form = function form() {
-  return "<form class=\"form-group\">\n    <div class=\"mb-3\">\n        <input type='text' class=\"form-control term\" placeholder=\"Movie name\">\n    <button type=\"submit\" class=\"btn btn-primary\">Ieskoti</button>\n    </div>\n    </form>\n    <button type=\"button\" class=\"btn history btn-info\">Istorija</button>";
+  return "<form class=\"form-group\">\n    <div class=\"mb-3\">\n        <input type='text' class=\"form-control term\" placeholder=\"Movie name\">\n    <button type=\"submit\" class=\"btn btn-primary\">Ieskoti</button>\n    </div>\n    </form>";
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (form);
+
+/***/ }),
+
+/***/ "./src/modules/infoHtml.js":
+/*!*********************************!*\
+  !*** ./src/modules/infoHtml.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var infoHtml = function infoHtml(element) {
+  return "\n            <div class=\"movie-card__center\">\n                <img src=\"".concat(element.Poster, "\" class=\"img-fluid\" alt=\"").concat(element.Title, " poster\" />\n                <h4 class=\"movie-title\">").concat(element.Title, "</h4>\n                <p class=\"movie-year\"><strong>Year:</strong> ").concat(element.Year, "</p>\n                <p class=\"movie-type\"><strong>Type:</strong> ").concat(element.Type, "</p>\n                <p class=\"movie-id\" style=\"display: none;\">").concat(element.imdbID, "</p>\n            </div>\n            <div class=\"tab-content\" style=\"display: none;\"></div>\n        ");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (infoHtml);
 
 /***/ }),
 
@@ -134,20 +137,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _detilsHtml__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./detilsHtml */ "./src/modules/detilsHtml.js");
+
 var movieDetails = function movieDetails(movie, contentDiv) {
   var newDiv = contentDiv.querySelector('.tab-content');
   newDiv.innerHTML = "";
-  newDiv.innerHTML = "\n    <div class=\"movie-card\">\n        <div class=\"movie-header\">\n            <p class=\"movie-rating\">Rated: <strong>".concat(movie.Rated || 'N/A', "</strong></p>\n        </div>\n        <div class=\"movie-body\">\n            <p><strong>Released:</strong> ").concat(movie.Released || 'N/A', "</p>\n            <p><strong>Runtime:</strong> ").concat(movie.Runtime || 'N/A', "</p>\n            <p><strong>Genre:</strong> ").concat(movie.Genre || 'N/A', "</p>\n            <p><strong>Director:</strong> ").concat(movie.Director || 'N/A', "</p>\n            <p><strong>Writer:</strong> ").concat(movie.Writer || 'N/A', "</p>\n            <p><strong>Actors:</strong> ").concat(movie.Actors || 'N/A', "</p>\n            <p class=\"movie-plot\"><strong>Plot:</strong> ").concat(movie.Plot || 'N/A', "</p>\n            <p><strong>Language:</strong> ").concat(movie.Language || 'N/A', "</p>\n            <p><strong>Country:</strong> ").concat(movie.Country || 'N/A', "</p>\n        </div>\n        <div class=\"movie-footer\">\n            <p><strong>IMDb Rating:</strong> ").concat(movie.imdbRating || 'N/A', "</p>\n        </div>\n    </div>\n");
-  /* Object.keys(movie).forEach((key) =>{
-       if(!['Title','Year','Poster','Ratings','Website','Response','DVD','Production','BoxOffice'].includes(key)){
-           let newElement = document.createElement('p');
-           newElement.textContent = `${key}: ${movie[key]}`;
-           newDiv.appendChild(newElement);
-       }
-       //contentDiv = document.querySelector('.tab-content')
-       //content.innerHTML = "";
-       contentDiv.appendChild(newDiv);
-   }) */
+  newDiv.innerHTML = (0,_detilsHtml__WEBPACK_IMPORTED_MODULE_0__["default"])(movie);
   contentDiv.appendChild(newDiv);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (movieDetails);
@@ -164,30 +159,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _infoHtml__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./infoHtml */ "./src/modules/infoHtml.js");
+
 var movieInfo = function movieInfo(movies) {
+  var listGroup = document.querySelector('.list-group');
+  listGroup.innerHTML = "";
   movies.forEach(function (element) {
     var newDiv = document.createElement('div');
     newDiv.classList.add('movie-card');
     newDiv.dataset.value = element.imdbID;
-    /*let newDetailsDiv = document.createElement('div')
-    let newImg = document.createElement('img');
-    let newTitle = document.createElement('h4');
-    let newYear = document.createElement('p');
-    let newType = document.createElement('p');
-    let newId = document.createElement('p');
-    newDiv.dataset.value =  element.imdbID;
-    newTitle.textContent = element.Title;
-    newYear.textContent = element.Year;
-    newImg.src = element.Poster;
-    newImg.className ="img-fluid";
-    newId.textContent = element.imdbID;
-    newType.textContent = element.Type;
-    newId.style.display = "none";
-    newDetailsDiv.display ="none"
-    newDetailsDiv.className ="tab-content"
-    newDiv.append(newImg,newTitle,newYear,newType ,newId, newDetailsDiv);*/
-    newDiv.innerHTML = "\n            <div class=\"movie-card__center\">\n                <img src=\"".concat(element.Poster, "\" class=\"img-fluid\" alt=\"").concat(element.Title, " poster\" />\n                <h4 class=\"movie-title\">").concat(element.Title, "</h4>\n                <p class=\"movie-year\"><strong>Year:</strong> ").concat(element.Year, "</p>\n                <p class=\"movie-type\"><strong>Type:</strong> ").concat(element.Type, "</p>\n                <p class=\"movie-id\" style=\"display: none;\">").concat(element.imdbID, "</p>\n            </div>\n            <div class=\"tab-content\" style=\"display: none;\"></div>\n        ");
-    document.querySelector('.list-group').appendChild(newDiv);
+    newDiv.innerHTML = (0,_infoHtml__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
+    listGroup.appendChild(newDiv);
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (movieInfo);
@@ -238,14 +220,18 @@ var searchMovie = function searchMovie() {
     e.preventDefault();
     var inputVal = document.querySelector('input');
     (0,_storeSearches__WEBPACK_IMPORTED_MODULE_2__["default"])(queryArray, inputVal.value);
-    console.log(JSON.parse(localStorage.getItem("searchedTerms")));
     var movies = document.querySelector('.list-group');
-    if (movies && movies.innerHTML.trim() !== "") {
+    var parsedData = JSON.parse(localStorage.getItem(inputVal.value));
+    if (parsedData !== null) {
       movies.innerHTML = "";
+      (0,_movieInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(parsedData);
+    } else {
+      movies.innerHTML = "";
+      (0,_ajaxService__WEBPACK_IMPORTED_MODULE_0__["default"])('s', inputVal.value).then(function (result) {
+        (0,_movieInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(result.Search);
+        localStorage.setItem(inputVal.value, JSON.stringify(result.Search));
+      });
     }
-    (0,_ajaxService__WEBPACK_IMPORTED_MODULE_0__["default"])(inputVal.value).then(function (result) {
-      (0,_movieInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(result.Search);
-    });
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (searchMovie);
