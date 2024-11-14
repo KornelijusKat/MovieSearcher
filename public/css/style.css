@@ -12001,7 +12001,7 @@ textarea.form-control-lg {
   }
 }
 
-.movie-card {
+.movie__card {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -12011,50 +12011,50 @@ textarea.form-control-lg {
   font-family: Arial, sans-serif;
   color: #333;
 }
-.movie-card img {
+.movie__card img {
   width: 100%;
   height: auto;
 }
 @media (min-width: 600px) {
-  .movie-card img {
+  .movie__card img {
     width: auto;
     max-width: 400px;
   }
 }
 
-.movie-card__center {
+.movie__card__center {
   margin: 0 auto;
   width: 100%;
 }
 
-.movie-header {
+.movie__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
 
-.movie-title {
+.movie__title {
   font-size: 1.5em;
   margin: 0;
 }
 
-.movie-rating {
+.movie__rating {
   font-size: 0.9em;
   color: #888;
 }
 
-.movie-body p {
+.movie__body p {
   margin: 8px 0;
   line-height: 1.5;
 }
 
-.movie-plot {
+.movie__plot {
   font-style: italic;
   color: #555;
 }
 
-.movie-footer {
+.movie__footer {
   margin-top: 15px;
   font-size: 0.9em;
   color: #777;

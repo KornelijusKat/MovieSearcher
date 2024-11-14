@@ -1,10 +1,10 @@
 const detailsHtml = (movie) =>{
 return `
-<div class="movie-card">
-    <div class="movie-header">
-        <p class="movie-rating">Rated: <strong>${movie.Rated || 'N/A'}</strong></p>
+<div class="movie__card">
+    <div class="movie__header">
+        <p class="movie__rating">Rated: <strong>${movie.Rated || 'N/A'}</strong></p>
     </div>
-    <div class="movie-body">
+    <div class="movie__body">
         <p><strong>Released:</strong> ${movie.Released || 'N/A'}</p>
         <p><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
         <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
@@ -15,7 +15,7 @@ return `
         <p><strong>Language:</strong> ${movie.Language || 'N/A'}</p>
         <p><strong>Country:</strong> ${movie.Country || 'N/A'}</p>
     </div>
-    <div class="movie-footer">
+    <div class="movie__footer">
         <p><strong>IMDb Rating:</strong> ${movie.imdbRating || 'N/A'}</p>
     </div>
 </div>

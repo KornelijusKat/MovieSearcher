@@ -7,9 +7,13 @@ const eventFillDetails = () => {
         if (detailsDiv && detailsDiv.innerHTML.trim() !== "") {
             detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
         }
+        else if(localStorage.getItem(movieItem.dataset.value)){
+            movieDetails(JSON.parse(localStorage.getItem(movieItem.dataset.value)), movieItem);
+        }
         else{
         ajaxService('i',movieItem.dataset.value).then(result => {
             movieDetails(result, movieItem);
+            localStorage.setItem(movieItem.dataset.value,JSON.stringify(result));
         })}
     })
 }

@@ -56,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var detailsHtml = function detailsHtml(movie) {
-  return "\n<div class=\"movie-card\">\n    <div class=\"movie-header\">\n        <p class=\"movie-rating\">Rated: <strong>".concat(movie.Rated || 'N/A', "</strong></p>\n    </div>\n    <div class=\"movie-body\">\n        <p><strong>Released:</strong> ").concat(movie.Released || 'N/A', "</p>\n        <p><strong>Runtime:</strong> ").concat(movie.Runtime || 'N/A', "</p>\n        <p><strong>Genre:</strong> ").concat(movie.Genre || 'N/A', "</p>\n        <p><strong>Director:</strong> ").concat(movie.Director || 'N/A', "</p>\n        <p><strong>Writer:</strong> ").concat(movie.Writer || 'N/A', "</p>\n        <p><strong>Actors:</strong> ").concat(movie.Actors || 'N/A', "</p>\n        <p class=\"movie-plot\"><strong>Plot:</strong> ").concat(movie.Plot || 'N/A', "</p>\n        <p><strong>Language:</strong> ").concat(movie.Language || 'N/A', "</p>\n        <p><strong>Country:</strong> ").concat(movie.Country || 'N/A', "</p>\n    </div>\n    <div class=\"movie-footer\">\n        <p><strong>IMDb Rating:</strong> ").concat(movie.imdbRating || 'N/A', "</p>\n    </div>\n</div>\n");
+  return "\n<div class=\"movie__card\">\n    <div class=\"movie__header\">\n        <p class=\"movie__rating\">Rated: <strong>".concat(movie.Rated || 'N/A', "</strong></p>\n    </div>\n    <div class=\"movie__body\">\n        <p><strong>Released:</strong> ").concat(movie.Released || 'N/A', "</p>\n        <p><strong>Runtime:</strong> ").concat(movie.Runtime || 'N/A', "</p>\n        <p><strong>Genre:</strong> ").concat(movie.Genre || 'N/A', "</p>\n        <p><strong>Director:</strong> ").concat(movie.Director || 'N/A', "</p>\n        <p><strong>Writer:</strong> ").concat(movie.Writer || 'N/A', "</p>\n        <p><strong>Actors:</strong> ").concat(movie.Actors || 'N/A', "</p>\n        <p class=\"movie-plot\"><strong>Plot:</strong> ").concat(movie.Plot || 'N/A', "</p>\n        <p><strong>Language:</strong> ").concat(movie.Language || 'N/A', "</p>\n        <p><strong>Country:</strong> ").concat(movie.Country || 'N/A', "</p>\n    </div>\n    <div class=\"movie__footer\">\n        <p><strong>IMDb Rating:</strong> ").concat(movie.imdbRating || 'N/A', "</p>\n    </div>\n</div>\n");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (detailsHtml);
 
@@ -82,9 +82,12 @@ var eventFillDetails = function eventFillDetails() {
     var detailsDiv = movieItem.querySelector('.tab-content');
     if (detailsDiv && detailsDiv.innerHTML.trim() !== "") {
       detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+    } else if (localStorage.getItem(movieItem.dataset.value)) {
+      (0,_movieDetails__WEBPACK_IMPORTED_MODULE_1__["default"])(JSON.parse(localStorage.getItem(movieItem.dataset.value)), movieItem);
     } else {
       (0,_ajaxService__WEBPACK_IMPORTED_MODULE_0__["default"])('i', movieItem.dataset.value).then(function (result) {
         (0,_movieDetails__WEBPACK_IMPORTED_MODULE_1__["default"])(result, movieItem);
+        localStorage.setItem(movieItem.dataset.value, JSON.stringify(result));
       });
     }
   });
@@ -121,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var infoHtml = function infoHtml(element) {
-  return "\n            <div class=\"movie-card__center\">\n                <img src=\"".concat(element.Poster, "\" class=\"img-fluid\" alt=\"").concat(element.Title, " poster\" />\n                <h4 class=\"movie-title\">").concat(element.Title, "</h4>\n                <p class=\"movie-year\"><strong>Year:</strong> ").concat(element.Year, "</p>\n                <p class=\"movie-type\"><strong>Type:</strong> ").concat(element.Type, "</p>\n                <p class=\"movie-id\" style=\"display: none;\">").concat(element.imdbID, "</p>\n            </div>\n            <div class=\"tab-content\" style=\"display: none;\"></div>\n        ");
+  return "\n            <div class=\"movie__card__center\">\n                <img src=\"".concat(element.Poster, "\" class=\"img-fluid\" alt=\"").concat(element.Title, " poster\" />\n                <h4 class=\"movie__title\">").concat(element.Title, "</h4>\n                <p class=\"movie__year\"><strong>Year:</strong> ").concat(element.Year, "</p>\n                <p class=\"movie__type\"><strong>Type:</strong> ").concat(element.Type, "</p>\n                <p class=\"movie__id\" style=\"display: none;\">").concat(element.imdbID, "</p>\n            </div>\n            <div class=\"tab-content\" style=\"display: none;\"></div>\n        ");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (infoHtml);
 
@@ -166,7 +169,7 @@ var movieInfo = function movieInfo(movies) {
   listGroup.innerHTML = "";
   movies.forEach(function (element) {
     var newDiv = document.createElement('div');
-    newDiv.classList.add('movie-card');
+    newDiv.classList.add('movie__card');
     newDiv.dataset.value = element.imdbID;
     newDiv.innerHTML = (0,_infoHtml__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
     listGroup.appendChild(newDiv);
@@ -272,7 +275,7 @@ var viewHistory = function viewHistory() {
     var movies = document.querySelector('.list-group');
     movies.innerHTML = "";
     var card = document.createElement('div');
-    card.className = "movie-card";
+    card.className = "movie__card";
     JSON.parse(localStorage.getItem("searchedTerms")).forEach(function (element) {
       var search = document.createElement('p');
       search.textContent = element;

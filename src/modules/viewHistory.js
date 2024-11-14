@@ -4,7 +4,7 @@ const viewHistory = () => {
         const movies = document.querySelector('.list-group');
         movies.innerHTML = "";
         let card = document.createElement('div');
-        card.className = "movie-card";
+        card.className = "movie__card";
         JSON.parse(localStorage.getItem("searchedTerms")).forEach(element => {
             let search = document.createElement('p');
             search.textContent = element;
